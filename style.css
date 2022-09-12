@@ -1,0 +1,292 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --primary-color: #16213E;
+    --secondary-color: #0F3460;
+    --tertiary-color: #533483;
+    --quaternary-color: #E94560;
+    --text-color-1: white;
+    --text-color-2: grey;
+    --text-size-little: 1rem;
+    --text-size-normal: 1.5rem;
+    --text-size-big: 2rem;
+}
+
+/*#########################################*/
+/*                  HEADER                 */
+/*#########################################*/
+
+header {
+    height: 15vh;
+    display: flex;
+    background-color: var(--quaternary-color);
+}
+
+header h1 {
+    margin: auto;
+    font-size: 3rem;
+    color: var(--text-color-1);
+    text-transform: uppercase;
+}
+
+/*#########################################*/
+/*                   MAIN                  */
+/*#########################################*/
+
+main {
+    min-height: 80vh;
+    background-color: lightgray;
+    display: flex;
+}
+
+.library {
+    min-height: 100%;
+    width: 80vw;
+    background-color: var(--primary-color);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-auto-rows: 440px;
+    place-items: center;
+}
+
+.tile {
+    height: 420px;
+    width: 250px;
+    background-color: var(--secondary-color);
+    box-shadow: 0px 0px 10px 10px #555;
+    border-radius: 1rem;
+    transition: all 1s;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tile:hover {
+    transform: scale(1.1);
+}
+
+.tile p, .tile .fa-solid, .tile button {
+    color: var(--text-color-1);
+    font-size: var(--text-size-normal);
+    text-align: center;
+}
+
+.icons {
+    align-self: flex-end;
+}
+
+.fa-solid:first-child {
+    margin-right: 1rem;
+}
+
+.tile p:nth-child(2)::before, .tile p:nth-child(2)::after {
+    content: '"';
+}
+
+.tile button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.tile button:nth-of-type(2) {
+    background-color: red;
+}
+
+
+
+.plus {
+    width: 200px;
+    height: 200px;
+    background-color: darkgray;
+    box-shadow: 0px 0px 17px 12px rgb(185, 31, 31);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(8*var(--text-size-normal));
+    font-weight: bold;
+    transition: all 2s;
+}
+
+.plus:hover {
+    transform: scale(1.2);
+    rotate: 90deg;
+    transition: 1s;
+}
+
+/*#########################################*/
+/*                   FORM                  */
+/*#########################################*/
+
+.information-panel {
+    --first-color: #1d2227;
+    --second-color: #4A4A4A;
+    --third-color: #9B9B9B;
+    --fourth-color: #F0F0F0;
+    --initial-width: 250px;
+    --focus-width: 400px;
+    min-height: 100%;
+    min-width: 470px;
+    background-color: var(--first-color);
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+form {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 4px;
+    margin-top: 1.5rem;
+}
+
+.field label {
+    display: block;
+    color: var(--third-color);
+    cursor: text;
+    font-size: var(--text-size-little);
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    transform: translateY(-1.8rem);
+    transition: all 0.5s;
+}
+
+.field input {
+    display: block;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid var(--second-color);
+    color: white;
+    font-size: var(--text-size-normal);
+    letter-spacing: 0.2rem;
+    margin: 0rem 2rem;
+    padding: 0.2rem 0;
+    text-align: center;
+    transition: all 0.5s;
+    width: var(--initial-width);
+}
+
+.field input:focus {
+    width: var(--focus-width);
+    max-width: 100%;
+    margin: 0rem 1rem;
+}
+
+.field input:focus ~ .label-text {
+    color: var(--fourth-color);
+    font-size: var(--text-size-little);
+    transform: translateY(-4.2rem);
+    margin-top: 0.5rem;
+}
+
+.field input:valid ~ .label-text {
+    color: var(--fourth-color);
+    font-size: var(--text-size-little);
+    transform: translateY(-4.2rem);
+}
+
+.field input:valid {
+    border-bottom: 2px solid green;
+}
+
+form button {
+    background: transparent;
+    color: #F0F0F0;
+    border: 2px solid #F0F0F0;
+    font-size: var(--text-size-normal);
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    margin: 1rem;
+    transition: all 0.5s;
+}
+
+button:hover, button:focus {
+    background-color: white;
+    color: #1d2227;
+}
+
+/*   ANIMATION CENTRE VERS EXT           */
+
+.bar {
+    display: block;
+    width: var(--initial-width);
+    position: relative;
+}
+
+.bar:before,
+.bar:after {
+    content: "";
+    height: 2px;
+    width: 0;
+    position: absolute;
+    bottom: 1px;
+    background-color: white;
+    transition: all 0.3s;
+}
+.bar:before {
+	left: 50%;
+}
+
+.bar:after {
+	right: 50%;
+}
+
+input:focus ~ .bar {
+    width: var(--focus-width);
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+	width: 50%;
+}
+
+/*#########################################*/
+/*                  FOOTER                 */
+/*#########################################*/
+
+
+footer
+{
+    height: 5vh;
+    display: flex;
+    background-color: var(--primary-color);
+}
+
+footer p, .fab {
+    margin: auto;
+    color: white;
+}
+
+.fa-github:hover 
+{
+    transform:rotate(360deg) scale(2);
+    transition: 1s;
+}
+
+a
+{
+    text-decoration: none;
+    color: black;
+}

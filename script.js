@@ -38,15 +38,11 @@ Book.prototype.stateRead = function () {
 
 /* Formulaire */
 
-fieldButton = document.getElementById('fieldSubmit');
-
-fieldButton.addEventListener('click', function(e) {
-  e.preventDefault();
-  addBookToLibrary();
-  e.stopPropagation();
-
-});
-
+form = document.getElementById('create-book');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    addBookToLibrary();
+})
 
 function addBookToLibrary() {
   

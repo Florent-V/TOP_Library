@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="./style.css">
-    <link 
-        rel="stylesheet" 
-        href="https://use.fontawesome.com/releases/v6.1.2/css/all.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css" />
     <title>Libray Project</title>
     <script async defer src="./script.js"></script>
 </head>
+
 <body>
     <header>
         <h1>Library</h1>
     </header>
     <main>
-        
+
         <div id="library" class="library">
             <div class="tile">
                 <p class="icons"><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></p>
                 <p class="bookTitle">Le seigneur des anneaux</p>
                 <p class="bookAuthor">Franck Thilliez</p>
                 <p class="bookPages">520 pages</p>
-                <p><i class="fa-solid fa-minus"></i> <span class="bookPagesRead">0</span> / 520 <i class="fa-solid fa-plus"></i></p>
+                <p><i class="fa-solid fa-minus"></i> <span class="bookPagesRead">0</span> / 520 <i
+                        class="fa-solid fa-plus"></i></p>
                 <button class="stateReadingBtn">Not Read Yet</button>
             </div>
 
-            <div class="tile">
 
-                
-
-            </div>
             <div class="tile">
 
             </div>
 
+            <div class="tile">
 
-
+            </div>
 
             <div id="plus" class="plus">+</div>
+            
         </div>
 
         <aside class="information-panel">
             <form>
+
                 <div class="field">
-                    <input type="text" name="title" id="title" required>
+                    <input type="text" name="title" id="title" required />
                     <span class="bar"></span>
                     <label class="label-text" for="title">Title</label>
+                    <p class="errorMsg"></p>
                 </div>
                 <div class="field">
-                    <input type="text" name="author" id="author" required>
+                    <input type="text" name="author" id="author" required />
                     <span class="bar"></span>
                     <label class="label-text" for="author">Author</label>
+                    <p class="errorMsg"></p>
                 </div>
                 <div class="field">
                     <input type="text" name="pagesTot" id="pagesTot" inputmode="numeric" required>
                     <span class="bar"></span>
                     <label class="label-text" for="pagesTot">Total pages</label>
+                    <p class="errorMsg"></p>
                 </div>
                 <div class="field">
                     <input type="text" name="pagesRead" id="pagesRead" inputmode="numeric" required>
                     <span class="bar"></span>
                     <label class="label-text" for="pagesRead">Read pages</label>
+                    <p class="errorMsg"></p>
                 </div>
                 <button id="fieldSubmit">Submit</button>
+                
             </form>
+            
 
         </aside>
 
 
     </main>
     <footer>
-        <p>Copyright &copy <span id="current-year"></span> Florent Vasseur <a href="https://github.com/Florent-V"><i class="fab fa-github"></i></a></p>
+        <p>Copyright &copy <span id="current-year"></span> Florent Vasseur <a href="https://github.com/Florent-V"><i
+                    class="fab fa-github"></i></a></p>
     </footer>
 
-    
-    
+
+
 </body>
+
 </html>

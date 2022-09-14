@@ -2,12 +2,12 @@ let myLibrary = [];
 
 function Book(
   dataId = 0,
-  title ='Unknown',
-  author ='Unkown',
+  title = 'Unknown',
+  author = 'Unkown',
   totalpages = 0,
   readpages = 0,
   completed = false
-){
+) {
   this.dataId = dataId;
   this.title = title;
   this.author = author;
@@ -16,23 +16,23 @@ function Book(
   this.completed = completed;
 };
 
-Book.prototype.info = function() {
+Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.totalpages} pages,  ${this.readpages} lues`;
 }
 
-Book.prototype.stateRead = function() {
+Book.prototype.stateRead = function () {
   switch (this.readpages) {
     case "0":
       this.completed = 'Not Read';
-      this.color = '#7E1A28'
+      this.color = '#8A111F';
       break;
     case this.totalpages:
       this.completed = 'Read';
-      this.color = 'green'
+      this.color = '#0D7A25';
       break;
     default:
       this.completed = 'Reading';
-      this.color = 'orange'
+      this.color = '#A25B19';
   }
 };
 
@@ -44,11 +44,14 @@ fieldButton.addEventListener('click', function(e) {
   e.preventDefault();
   addBookToLibrary();
   e.stopPropagation();
+
 });
 
+
 function addBookToLibrary() {
+  
   let inputValues = [];
-  inputValues.push(myLibrary.length +1)
+  inputValues.push(0);
   for (let i of document.querySelectorAll('.field > input')) {
     inputValues.push(i.value);
     i.value = "";
@@ -57,8 +60,9 @@ function addBookToLibrary() {
   myLibrary.push(mybook);
   myLibrary[myLibrary.length - 1].stateRead();
   console.table(myLibrary);
-  createTile(mybook)
+  createTile(mybook);
 };
+
 
 function createTile(book) {
   let tile = document.createElement('div');
@@ -106,24 +110,51 @@ function createTile(book) {
   tile.appendChild(button);
 
 
-
-
-
-
-  
-  button.addEventListener('click', function(e) {
-    if (button.innerText == "Read") {
-      button.style.backgroundColor = "red";
-      button.innerText = "Not Read"
-    } else {
-      button.style.backgroundColor = "green";
-      button.innerText = "Read"
-    }
+  button.addEventListener('click', function (e) {
+    udapteReadingStatus(button)
     e.stopPropagation();
   });
+
+  iconPlus.addEventListener('click', function (e) {
+    plusOnePage(book, bookPagesRead);
+    e.stopPropagation();
+  });
+
+  iconMinus.addEventListener('click', function (e) {
+    minusOnePage(book, bookPagesRead);
+    e.stopPropagation();
+  });
+
+
   document.getElementById('library').insertBefore(tile, document.getElementById('plus'));
 
 }
+
+
+function plusOnePage(book, bookPagesRead) {
+  book.readpages++
+  bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
+}
+
+function minusOnePage(book, bookPagesRead) {
+  book.readpages--
+  bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
+}
+
+
+
+function udapteReadingStatus(button) {
+  if (button.innerText == 'Read') {
+    button.style.backgroundColor = '#8A111F';
+    button.innerText = 'Not Read';
+  } else {
+    button.style.backgroundColor = '#0D7A25';
+    button.innerText = 'Read';
+  }
+};
+
+
+
 
 
 
@@ -141,55 +172,55 @@ btn3 = document.getElementsByClassName('fa-minus');
 bookPagesRead = document.getElementsByClassName('bookPagesRead');
 
 const flag = {
-    value : 0
+  value: 0
 };
 
 const state = {
-    0 : {
-      name: "Not read",
-      color: "red"
-    },
-    1 : {
-      name: "Reading",
-      color: "orange"
-    },
-    2 : {
-      name: "Read",
-      color: "green"
-    }
+  0: {
+    name: "Not read",
+    color: "red"
+  },
+  1: {
+    name: "Reading",
+    color: "orange"
+  },
+  2: {
+    name: "Read",
+    color: "green"
+  }
 };
 
-btn1[0].addEventListener('click', function(e) {
-    e.stopPropagation();
-    updateButton();
+btn1[0].addEventListener('click', function (e) {
+  e.stopPropagation();
+  updateButton();
 });
 
-btn2[0].addEventListener('click', function(e) {
+btn2[0].addEventListener('click', function (e) {
   e.stopPropagation();
-  plusOnePage();
+  plusOnePage2();
 });
 
-btn3[0].addEventListener('click', function(e) {
+btn3[0].addEventListener('click', function (e) {
   e.stopPropagation();
-  minusOnePage();
+  minusOnePage2();
 });
 
 function updateButton() {
-    btn1[0].innerText = state[flag.value].name;
-    btn1[0].style.backgroundColor = state[flag.value].color;
-    btn1[0].style.color = "white";
-    if (flag.value < 2) {
-        flag.value++;
-    } else {
-        flag.value = 0;
-    }
+  btn1[0].innerText = state[flag.value].name;
+  btn1[0].style.backgroundColor = state[flag.value].color;
+  btn1[0].style.color = "white";
+  if (flag.value < 2) {
+    flag.value++;
+  } else {
+    flag.value = 0;
+  }
 };
 
-function plusOnePage() {
+function plusOnePage2() {
   bookPagesRead[0].innerText++;
 }
 
-function minusOnePage() {
+function minusOnePage2() {
   bookPagesRead[0].innerText--;
 }
 

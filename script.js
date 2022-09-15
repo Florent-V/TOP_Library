@@ -22,7 +22,7 @@ Book.prototype.info = function () {
 
 Book.prototype.stateRead = function () {
   switch (this.readpages) {
-    case "0":
+    case 0:
       this.completed = 'Not Read';
       this.color = '#8A111F';
       break;
@@ -38,30 +38,52 @@ Book.prototype.stateRead = function () {
 
 /* Formulaire */
 
-fieldButton = document.getElementById('fieldSubmit');
-
-fieldButton.addEventListener('click', function(e) {
-  e.preventDefault();
-  addBookToLibrary();
-  e.stopPropagation();
-
-});
+errorMsg = document.getElementsByClassName('errorMsg')
+form = document.getElementById('create-book');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    addBookToLibrary();
+})
 
 
 function addBookToLibrary() {
-  
   let inputValues = [];
-  inputValues.push(0);
+  inputValues.push(Date.now());
   for (let i of document.querySelectorAll('.field > input')) {
     inputValues.push(i.value);
-    i.value = "";
   }
-  let mybook = new Book(...inputValues);
-  myLibrary.push(mybook);
-  myLibrary[myLibrary.length - 1].stateRead();
-  console.table(myLibrary);
-  createTile(mybook);
+  console.log(inputValues);
+  let control = checkEntries(inputValues);
+  if (control) {
+    for (let i of document.querySelectorAll('.field > input')) {
+      i.value = "";
+    }
+    let mybook = new Book(...inputValues);
+    mybook.stateRead();
+    myLibrary.push(mybook);
+    console.table(myLibrary);
+    createTile(mybook);
+  }
 };
+
+
+function checkEntries(inputValues) {
+  inputValues[3] = +inputValues[3];
+  inputValues[4] = +inputValues[4];
+  if ( parseInt(inputValues[4]) >  parseInt(inputValues[3]) ){
+    errorMsg[3].innerHTML = 'Read Pages must be less <br> than the Total Pages';
+    document.getElementById('pagesRead').style.borderBottom = "2px solid red";
+    document.getElementById('fieldSubmit').focus();
+    return false;
+  } else {
+    document.getElementById('pagesRead').style.borderBottom = "1px solid var(--second-color)"
+    errorMsg[3].innerHTML = '';
+    return true;
+  }
+}
+
+
+
 
 
 function createTile(book) {
@@ -116,12 +138,12 @@ function createTile(book) {
   });
 
   iconPlus.addEventListener('click', function (e) {
-    plusOnePage(book, bookPagesRead);
+    plusOnePage(book, bookPagesRead, button);
     e.stopPropagation();
   });
 
   iconMinus.addEventListener('click', function (e) {
-    minusOnePage(book, bookPagesRead);
+    minusOnePage(book, bookPagesRead, button);
     e.stopPropagation();
   });
 
@@ -131,16 +153,39 @@ function createTile(book) {
 }
 
 
-function plusOnePage(book, bookPagesRead) {
-  book.readpages++
-  bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
+function plusOnePage(book, bookPagesRead, button) {
+  let page = book.readpages;
+  console.log(page);
+  console.log(book.totalpages);
+
+  if (0 <= page && page < book.totalpages) {
+    book.readpages++
+    bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
+    if (page === 0 || (book.readpages === book.totalpages) ) {
+      book.stateRead();
+      button.style.backgroundColor = book.color;
+      button.innerText = book.completed;
+      console.table(book);
+    }
+  } 
 }
 
-function minusOnePage(book, bookPagesRead) {
-  book.readpages--
-  bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
-}
+function minusOnePage(book, bookPagesRead, button) {
+  let page = book.readpages;
 
+  if (0 < page && page <= book.totalpages) {
+    book.readpages--
+    bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
+    if (book.readpages === 0 || (page === book.totalpages) ) {
+      book.stateRead();
+      button.style.backgroundColor = book.color;
+      button.innerText = book.completed;
+      console.table(book);
+
+    }
+  }
+  
+}
 
 
 function udapteReadingStatus(button) {

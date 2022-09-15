@@ -216,7 +216,7 @@ form button {
     text-transform: uppercase;
     padding: 1rem 3rem;
     cursor: pointer;
-    margin: 1rem;
+    margin: 2rem 1rem;
     transition: all 0.5s;
 }
 
@@ -264,9 +264,10 @@ input:focus~.bar:after {
 
 form p {
     color: white;
-    font-size: var(--text-size-little);
+    font-size: 0.7rem;
     align-self: flex-start;
     margin-top: -1rem;
+    text-align: left;
 }
 
 /*#########################################*/

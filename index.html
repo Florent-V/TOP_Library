@@ -42,7 +42,7 @@
         </div>
 
         <aside class="information-panel">
-            <form>
+            <form id="create-book">
 
                 <div class="field">
                     <input type="text" name="title" id="title" required />
@@ -57,13 +57,13 @@
                     <p class="errorMsg"></p>
                 </div>
                 <div class="field">
-                    <input type="text" name="pagesTot" id="pagesTot" inputmode="numeric" required>
+                    <input type="text" name="pagesTot" id="pagesTot" inputmode="numeric" pattern="[0-9]+" title="Please enter a number" required>
                     <span class="bar"></span>
                     <label class="label-text" for="pagesTot">Total pages</label>
                     <p class="errorMsg"></p>
                 </div>
                 <div class="field">
-                    <input type="text" name="pagesRead" id="pagesRead" inputmode="numeric" required>
+                    <input type="text" name="pagesRead" id="pagesRead" inputmode="numeric" pattern="[0-9]+" title="Please enter a number" required>
                     <span class="bar"></span>
                     <label class="label-text" for="pagesRead">Read pages</label>
                     <p class="errorMsg"></p>

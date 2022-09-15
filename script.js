@@ -1,5 +1,4 @@
 let myLibrary = [];
-
 function Book(
   dataId = 0,
   title = 'Unknown',
@@ -45,7 +44,6 @@ form.addEventListener('submit', function(event) {
     addBookToLibrary();
 })
 
-
 function addBookToLibrary() {
   let inputValues = [];
   inputValues.push(Date.now());
@@ -81,10 +79,6 @@ function checkEntries(inputValues) {
     return true;
   }
 }
-
-
-
-
 
 function createTile(book) {
   let tile = document.createElement('div');
@@ -133,7 +127,7 @@ function createTile(book) {
 
 
   button.addEventListener('click', function (e) {
-    udapteReadingStatus(button)
+    udapteReadingStatus(book, bookPagesRead, button)
     e.stopPropagation();
   });
 
@@ -147,11 +141,8 @@ function createTile(book) {
     e.stopPropagation();
   });
 
-
   document.getElementById('library').insertBefore(tile, document.getElementById('plus'));
-
-}
-
+};
 
 function plusOnePage(book, bookPagesRead, button) {
   let page = book.readpages;
@@ -181,21 +172,21 @@ function minusOnePage(book, bookPagesRead, button) {
       button.style.backgroundColor = book.color;
       button.innerText = book.completed;
       console.table(book);
-
     }
   }
   
 }
 
-
-function udapteReadingStatus(button) {
+function udapteReadingStatus(book, bookPagesRead, button) {
   if (button.innerText == 'Read') {
-    button.style.backgroundColor = '#8A111F';
-    button.innerText = 'Not Read';
+    book.readpages = 0;
   } else {
-    button.style.backgroundColor = '#0D7A25';
-    button.innerText = 'Read';
+    book.readpages = book.totalpages;
   }
+  book.stateRead();
+  button.style.backgroundColor = book.color;
+  button.innerText = book.completed;
+  bookPagesRead.innerText = book.readpages + "/" + book.totalpages + " ";
 };
 
 

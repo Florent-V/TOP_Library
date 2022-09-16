@@ -50,7 +50,6 @@ function addBookToLibrary() {
   for (let i of document.querySelectorAll('.field > input')) {
     inputValues.push(i.value);
   }
-  console.log(inputValues);
   let control = checkEntries(inputValues);
   if (control) {
     for (let i of document.querySelectorAll('.field > input')) {
@@ -59,7 +58,6 @@ function addBookToLibrary() {
     let mybook = new Book(...inputValues);
     mybook.stateRead();
     myLibrary.push(mybook);
-    console.table(myLibrary);
     createTile(mybook);
   }
 };
@@ -95,6 +93,7 @@ function createTile(book) {
   let button = document.createElement('button');
 
   tile.classList.add("tile");
+  tile.setAttribute('id', book.dataId);
   button.classList.add('stateReadingBtn');
   icons.classList.add('icons');
   iconPen.classList.add('fa-solid', 'fa-pen');
@@ -141,13 +140,23 @@ function createTile(book) {
     e.stopPropagation();
   });
 
+  iconTrash.addEventListener('click', function (e) {
+    deleteTile(book);
+    e.stopPropagation();
+  })
+
+
+
   document.getElementById('library').insertBefore(tile, document.getElementById('plus'));
 };
 
+function deleteTile(book) {
+  document.getElementById(book.dataId).remove();
+  myLibrary.splice(myLibrary.indexOf(book),1);
+}
+
 function plusOnePage(book, bookPagesRead, button) {
   let page = book.readpages;
-  console.log(page);
-  console.log(book.totalpages);
 
   if (0 <= page && page < book.totalpages) {
     book.readpages++
@@ -156,7 +165,6 @@ function plusOnePage(book, bookPagesRead, button) {
       book.stateRead();
       button.style.backgroundColor = book.color;
       button.innerText = book.completed;
-      console.table(book);
     }
   } 
 }
@@ -171,7 +179,6 @@ function minusOnePage(book, bookPagesRead, button) {
       book.stateRead();
       button.style.backgroundColor = book.color;
       button.innerText = book.completed;
-      console.table(book);
     }
   }
   

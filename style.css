@@ -278,7 +278,7 @@ form p {
 footer {
     height: 5vh;
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--quaternary-color);
 }
 
 footer p,
